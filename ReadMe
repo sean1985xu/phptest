@@ -1,0 +1,2 @@
+htmlParse.php is used for parse HTML from the supplied web page and convert it to a JSON tree structure and saved into /var/log/yii/films.json parth.
+treeview is a javascript project to grab data from /var/log/yii/films.json and show in html interactive treeview, default page is index.html inside demo folder.
