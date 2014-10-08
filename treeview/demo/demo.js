@@ -16,6 +16,7 @@
 					examNode.className = "open";					
 					span = document.createElement("span");
 					span.className = "file";
+                                        console.log(aExam);
 					span.appendChild(createTextNode(aExam.children.a.value));
 					
 					examNode.appendChild(span);

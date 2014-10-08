@@ -26,7 +26,7 @@ function curl($url){
 
 function element_to_obj($element) {
 
-    foreach ($element->attributes as $attribute) {
+    foreach ($element->attributes as $attribute && element->tagName != 'a') {
         $obj['attributes'][$attribute->name] = $attribute->value;
     }    
 
