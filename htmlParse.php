@@ -25,10 +25,11 @@ function curl($url){
 }
 
 function element_to_obj($element) {
-
-    foreach ($element->attributes as $attribute && element->tagName != 'a') {
+  if (element->tagName != 'a') {
+    foreach ($element->attributes as $attribute) {
         $obj['attributes'][$attribute->name] = $attribute->value;
-    }    
+    }
+  }
 
     foreach ($element->childNodes as $subElement) {
         if ($subElement->nodeType == XML_TEXT_NODE) {
