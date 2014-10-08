@@ -16,74 +16,20 @@
 					examNode.className = "open";					
 					span = document.createElement("span");
 					span.className = "file";
-					span.appendChild(createTextNode(aExam.Name));
+					span.appendChild(createTextNode(aExam.children.a.value));
 					
 					examNode.appendChild(span);
 					examesNode.appendChild(examNode);
 					
 				
 						
-             }); 
-			 else{
-				 
-				 	var examNode = document.createElement("li");
-					examNode.className = "open";					
-					span = document.createElement("span");
-					span.className = "file";
-					span.appendChild(createTextNode(obj.Name));
-					
-					examNode.appendChild(span);
-					examesNode.appendChild(examNode);
-				 
-			}	
-			
-					
+             }); 	
 			
 		}
 
 		
 		
-		var folBuilder = function(obj, classesNode){
-			
-			$.each(obj, function (i, aClass) {  
-                    var classNode = document.createElement("li");
-		    classNode.className = "open";
-                    span = document.createElement("span");
-                    span.className = aClass.folder ? "folder" : "file"
-                    span.appendChild(createTextNode(aClass.Name))
-                    classNode.appendChild(span);
-                    var examesNode = document.createElement("ul"); 
-                    examesNode.className = aClass.folder ? "folder" : "file"; 
-					
-					if(aClass.folder && obj[0].ChildSubSet && obj[0].ChildSubSet.length>0){ 
-					classNode.appendChild(examesNode);
-                    			classesNode.appendChild(classNode);
-					folBuilder(aClass.ChildSubSet, examesNode);
-					}
-					else if(aClass.folder && obj[0].ChildSubSet && obj[0].ChildSubSet.length==0){ 
-					var examNode = document.createElement("li");
-					examNode.className = "open";					
-					span = document.createElement("span");
-					span.className = "folder";
-					span.appendChild(createTextNode(obj.Name));
-					
-					examNode.appendChild(span);
-					examesNode.appendChild(examNode);
-					classesNode.appendChild(classNode);
-					}
-					else { 
-					filBuilder(aClass, examesNode);
-		    
-                    classesNode.appendChild(classNode);
-					
-					}
-					
-					
-					
-					
-                });	
-			
-		}
+		
 	
 		
 		var buildTree = function (students) {
@@ -92,19 +38,15 @@
             root.id = "MovieTreeRoot";
             root.setAttribute("style", "margin: 15px");
             root.className = "filetree";
-            $.each(students.Root, function (i, student) { 
+            console.log(students.html[1].body.children.div);
+            $.each(students.html[1].body.children.div.children, function (i, student) { 
                 var studentNode = document.createElement("li");
                 studentNode.className = "open";
                 var span = document.createElement("span");
-                span.className = student.folder ? "folder" : "file";
-                span.appendChild(createTextNode(student.Name));
-                studentNode.appendChild(span);
- 
+
                 var classesNode = document.createElement("ul"); 
-				if(student.folder && student.ChildSubSet)
-				folBuilder(student.ChildSubSet, classesNode);
-				else
-				filBuilder(student.ChildSubSet, classesNode, true); 
+				
+				filBuilder(student.children, classesNode, true); 
 				
                 studentNode.appendChild(classesNode);
                 root.appendChild(studentNode);
@@ -121,8 +63,9 @@
  
         $(document).ready(function () {
             $("#MovieTree").html("");
-		var json = readTextFile("/var/log/yii/films.json");
-                var jsonObj = jQuery.parseJSON(json);	
+//		var json = readTextFile("/var/log/yii/films.json");
+//                var jsonObj = jQuery.parseJSON(json);	
+                var jsonObj = {"html":[{"lang":"en"},{"head":{"children":{"meta":{"attributes":{"name":"description","content":"A ast of animated movies"}},"title":{"value":"Putti Development Test"}},"style":null},"body":{"value":"\n        ","children":{"h1":{"value":"List of animated movies"},"div":{"attributes":{"class":"movie-list"},"value":"\n    ","children":{"div#bh_6":{"attributes":{"class":"movie","id":"bh_6","data-year":"2014"},"value":"\n                ","children":{"img":{"attributes":{"src":"http:\/\/ia.media-imdb.com\/images\/M\/MV5BMjI4MTIzODU2NV5BMl5BanBnXkFtZTgwMjE0NDAwMjE@._V1_SY317_CR0,0,214,317_AL_.jpg"}},"a":{"value":"\n            ","children":{"div":{"attributes":{"class":"synopsis"},"value":"The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes."}}}}},"div#tlm":{"attributes":{"class":"movie","id":"tlm","data-year":"2014"},"value":"\n                ","children":{"img":{"attributes":{"src":"http:\/\/ia.media-imdb.com\/images\/M\/MV5BMTg4MDk1ODExN15BMl5BanBnXkFtZTgwNzIyNjg3MDE@._V1_SX214_AL_.jpg"}},"a":{"value":"\n            ","children":{"div":{"attributes":{"class":"synopsis"},"value":"An ordinary Lego construction worker, thought to be the prophesied 'Special', is recruited to join a quest to stop an evil tyrant from gluing the Lego universe into eternal stasis."}}}}},"div#httyd":{"attributes":{"class":"movie","id":"httyd","data-year":"2010"},"value":"\n                ","children":{"img":{"attributes":{"src":"http:\/\/ia.media-imdb.com\/images\/M\/MV5BMjA5NDQyMjc2NF5BMl5BanBnXkFtZTcwMjg5ODcyMw@@._V1_SX214_AL_.jpg"}},"a":{"value":"\n            ","children":{"div":{"attributes":{"class":"synopsis"},"value":"A hapless young Viking who aspires to hunt dragons becomes the unlikely friend of a young dragon himself, and learns there may be more to the creatures than he assumed."}}}}},"div#up":{"attributes":{"class":"movie","id":"up","data-year":"2009"},"value":"\n                ","children":{"img":{"attributes":{"src":"http:\/\/ia.media-imdb.com\/images\/M\/MV5BMTk3NDE2NzI4NF5BMl5BanBnXkFtZTgwNzE1MzEyMTE@._V1_SX214_AL_.jpg"}},"a":{"value":"\n            ","children":{"div":{"attributes":{"class":"synopsis"},"value":"By tying thousands of balloons to his home, 78-year-old Carl sets out to fulfill his lifelong dream to see the wilds of South America. Russell, a wilderness explorer 70 years younger, inadvertently becomes a stowaway."}}}}},"div#mi":{"attributes":{"class":"movie","id":"mi","data-year":"2001"},"value":"\n                ","children":{"img":{"attributes":{"src":"http:\/\/ia.media-imdb.com\/images\/M\/MV5BMTY1NTI0ODUyOF5BMl5BanBnXkFtZTgwNTEyNjQ0MDE@._V1_SX214_AL_.jpg"}},"a":{"value":"\n            \n        ","children":{"div":{"attributes":{"class":"synopsis"},"value":"Monsters generate their city's power by scaring children, but they are terribly afraid themselves of being contaminated by children, so when one enters Monstropolis, top scarer Sulley finds his world disrupted."}}}}}}}}}}]};
 		buildTree(jsonObj);
             
         });
